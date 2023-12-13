@@ -26,6 +26,7 @@ javascript:(() => {
     // ID
     if (path[2].endsWith('twitter.com') && path[3]) {
         const id = path[3].split('?')[0];
+        // Twitter検索で "filter:media from:ユーザID" を実行してるだけ
         var url = 'https://twitter.com/search?f=live&q=filter:media%20from:' + id;
         window.open(url, '_blank');
     }
