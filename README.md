@@ -23,9 +23,31 @@ PC ブラウザ を想定<br>
 javascript:(() => {
     const path = location.href.split('/');
 
-    // ID
+    // URLに反応して欲しくないページ階層
+    const ignores = [
+        'home',
+        'explore',
+        'notifications',
+        'messages',
+        'i',
+        'communities',
+        'search',
+        'settings',
+        'privacy',
+        'tos',
+        'compose',
+    ];
+
     if (path[2].endsWith('twitter.com') && path[3]) {
         const id = path[3].split('?')[0];
+        // 無視
+        if (ignores.includes(id)) { return; }
+        
+        if (path[4]) {
+            const sub = path[4].split('?')[0];
+            if (ignores.includes(sub)) { return; }
+        }
+
         // Twitter検索で "filter:media from:ユーザID" を実行してるだけ
         var url = 'https://twitter.com/search?f=live&q=filter:media%20from:' + id;
         window.open(url, '_blank');
@@ -36,7 +58,7 @@ javascript:(() => {
 # コード (省略あり)
 ブックマークレットに登録するのはこれで
 ```js
-javascript:(()=>{const path=location.href.split('/');if(path[2].endsWith('twitter.com')&&path[3]){const id=path[3].split('?')[0];var url='https://twitter.com/search?f=live&q=filter:media%20from:'+id;window.open(url,'_blank')}})()
+javascript:(()=>{const path=location.href.split('/');const ignores=['home','explore','notifications','messages','i','communities','search','settings','privacy','tos','compose',];if(path[2].endsWith('twitter.com')&&path[3]){const id=path[3].split('?')[0];if(ignores.includes(id)){return} if(path[4]){const sub=path[4].split('?')[0];if(ignores.includes(sub)){return}} var url='https://twitter.com/search?f=live&q=filter:media%20from:'+id;window.open(url,'_blank')}})()
 ```
 
 省略化に利用したサイト様: https://rakko.tools/tools/33/
@@ -47,6 +69,13 @@ javascript:(()=>{const path=location.href.split('/');if(path[2].endsWith('twitte
 2. 登録したブックマークレットを実行
 3. 新しいタブが開き、メディアのみが検索結果に並ぶ
 4. 満足
+
+<br>
+右クリックメニューにブックマークレットを自由に追加できるアドオンなどを利用すると便利になるかも <br>
+
+FireFox ユーザの自分は以下で確認済み<br><br>
+ Contextlets<br>
+ https://addons.mozilla.org/en-US/firefox/addon/contextlets/
 
 # おわりに
 改変自由、ライセンス不要。
