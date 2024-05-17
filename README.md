@@ -38,7 +38,7 @@ javascript:(() => {
         'compose',
     ];
 
-    if (path[2].endsWith('twitter.com') && path[3]) {
+    if (path[2].endsWith('twitter.com') || path[2].endsWith('x.com') && path[3]) {
         const id = path[3].split('?')[0];
         // 無視
         if (ignores.includes(id)) { return; }
@@ -49,7 +49,7 @@ javascript:(() => {
         }
 
         // Twitter検索で "filter:media from:ユーザID" を実行してるだけ
-        var url = 'https://twitter.com/search?f=live&q=filter:media%20from:' + id;
+        var url = 'https://x.com/search?f=live&q=filter:media%20from:' + id;
         window.open(url, '_blank');
     }
 })();
@@ -58,7 +58,7 @@ javascript:(() => {
 # コード (省略あり)
 ブックマークレットに登録するのはこれで
 ```js
-javascript:(()=>{const path=location.href.split('/');const ignores=['home','explore','notifications','messages','i','communities','search','settings','privacy','tos','compose',];if(path[2].endsWith('twitter.com')&&path[3]){const id=path[3].split('?')[0];if(ignores.includes(id)){return} if(path[4]){const sub=path[4].split('?')[0];if(ignores.includes(sub)){return}} var url='https://twitter.com/search?f=live&q=filter:media%20from:'+id;window.open(url,'_blank')}})()
+javascript:(()=>{const path=location.href.split('/');const ignores=['home','explore','notifications','messages','i','communities','search','settings','privacy','tos','compose',];if(path[2].endsWith('twitter.com')||path[2].endsWith('x.com')&&path[3]){const id=path[3].split('?')[0];if(ignores.includes(id)){return} if(path[4]){const sub=path[4].split('?')[0];if(ignores.includes(sub)){return}} var url='https://x.com/search?f=live&q=filter:media%20from:'+id;window.open(url,'_blank')}})()
 ```
 
 省略化に利用したサイト様: https://rakko.tools/tools/33/
