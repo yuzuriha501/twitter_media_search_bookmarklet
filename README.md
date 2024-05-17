@@ -60,6 +60,7 @@ javascript:(()=>{const path=location.href.split('/');const ignores=['home','expl
 ```
 
 省略化に利用したサイト様: https://rakko.tools/tools/33/
+
 他: https://www.toptal.com/developers/javascript-minifier
 
 # 使い方
